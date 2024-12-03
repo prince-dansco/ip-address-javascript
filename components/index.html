@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Validation with FormData.entries()</title>
+  <style>
+    .error {
+      color: red;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Form Validation Example</h2>
+  <form id="myForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name">
+    <span id="nameError" class="error"></span><br><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email">
+    <span id="emailError" class="error"></span><br><br>
+
+    <label for="age">Age:</label>
+    <input type="number" id="age" name="age">
+    <span id="ageError" class="error"></span><br><br>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    // Get the form element
+    const form = document.getElementById('myForm');
+
+    // Form submission event listener
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent the default form submission
+
+      // Clear previous error messages
+      document.getElementById('nameError').textContent = '';
+      document.getElementById('emailError').textContent = '';
+      document.getElementById('ageError').textContent = '';
+
+      // Create a new FormData object
+      const formData = new FormData(form);
+
+      // Variable to track if form is valid
+      let isValid = true;
+
+      // Iterate over FormData entries
+      for (const [name, value] of formData.entries()) {
+        // Perform validation based on field names
+        if (name === 'name') {
+          if (!value) {
+            document.getElementById('nameError').textContent = 'Name is required.';
+            isValid = false;
+          }
+        }
+
+        if (name === 'email') {
+          const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Email regex
+          if (!value) {
+            document.getElementById('emailError').textContent = 'Email is required.';
+            isValid = false;
+          } else if (!emailPattern.test(value)) {
+            document.getElementById('emailError').textContent = 'Invalid email address.';
+            isValid = false;
+          }
+        }
+
+        if (name === 'age') {
+          if (!value) {
+            document.getElementById('ageError').textContent = 'Age is required.';
+            isValid = false;
+          } else if (value < 18) {
+            document.getElementById('ageError').textContent = 'You must be at least 18 years old.';
+            isValid = false;
+          }
+        }
+      }
+
+      // If the form is valid, handle the form data
+      if (isValid) {
+        console.log('Form is valid. FormData:');
+        for (const [name, value] of formData.entries()) {
+          console.log(`${name}: ${value}`);
+        }
+        alert('Form submitted successfully!');
+        form.reset(); // Reset the form after successful submission
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IP Address Tracker</title>
+    <!-- <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    /> -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="">
+      <div id="tracker">
+        <h1 class="author-title">IP Address Tracker</h1>
+        <div class="input-container">
+          <input
+            type="text"
+            id="ipInput"
+            placeholder="Enter IP address or domain"
+          />
+          <button id="searchBtn">
+            <img src="./images/icon-arrow.svg" alt="arrow" />
+          </button>
+        </div>
+
+        <div id="result">
+          <div class="flex width">
+            <p>IP Address: <span id="ip"></span></p>
+            <hr />
+          </div>
+          <div class="flex width">
+            <p>Location: <span id="location"></span></p>
+            <hr />
+          </div>
+          <div class="flex width">
+            <p>Timezone: <span id="timezone"></span></p>
+            <hr />
+          </div>
+          <div class=" width ">
+            <p>ISP: <span id="isp"></span></p>
+          </div>
+        </div>
+
+        <!-- Map container -->
+      </div>
+      <div id="map"></div>
+    </div>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <!-- <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script> -->
+    <script src="./script.js"></script>
+  </body>
+</html>
